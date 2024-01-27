@@ -92,7 +92,7 @@ class ApplicationStateMonitor {
 
   
     private var _hasResignedActiveSequence: Any? = {
-        guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return ni }
+        guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return nil }
         return NotificationCenter.default.notifications(named: NotificationNamesConstants.willResignActiveName).map { _ in true }
     }()
 
