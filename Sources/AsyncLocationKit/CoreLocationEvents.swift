@@ -31,19 +31,27 @@ enum CoreLocationDelegateEvent {
     case didChangeAccuracyAuthorization(authorization: CLAccuracyAuthorization)
 //    MARK: - Location events
     case didUpdate(locations: [CLLocation])
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didUpdateHeading(heading: CLHeading)
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didDetermine(state: CLRegionState, forRegion: CLRegion)
     
 //    MARK: - Beacons events
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didRange(beacons: [CLBeacon], beaconConstraint: CLBeaconIdentityConstraint)
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didFailRanginFor(beaconConstraint: CLBeaconIdentityConstraint, error: Error)
 //    MARK: - Region events
     case didEnterRegion(region: CLRegion)
@@ -54,7 +62,9 @@ enum CoreLocationDelegateEvent {
     case monitoringDidFailFor(region: CLRegion?, error: Error)
 //    MARK: - Visit event
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didVisit(visit: CLVisit)
 //    MARK: - Pause and resume events
     case locationUpdatesPaused

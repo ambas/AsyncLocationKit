@@ -24,7 +24,9 @@ import Foundation
 import CoreLocation.CLHeading
 
 public enum HeadingMonitorEvent {
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didUpdate(heading: CLHeading)
     case didFailWith(error: Error)
 }

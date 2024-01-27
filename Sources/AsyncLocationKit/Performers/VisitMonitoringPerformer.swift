@@ -25,7 +25,9 @@ import CoreLocation.CLVisit
 
 public enum VisitMonitoringEvent {
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     case didVisit(visit: CLVisit)
     case didFailWithError(error: Error)
 }

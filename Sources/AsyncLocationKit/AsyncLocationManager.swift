@@ -35,7 +35,9 @@ public typealias HeadingMonitorStream = AsyncStream<HeadingMonitorEvent>
 public typealias AuthorizationStream = AsyncStream<AuthorizationEvent>
 public typealias AccuracyAuthorizationStream = AsyncStream<AccuracyAuthorizationEvent>
 @available(watchOS, unavailable)
+@available(watchOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public typealias BeaconsRangingStream = AsyncStream<BeaconRangeEvent>
 
 public final class AsyncLocationManager {
@@ -129,7 +131,9 @@ public final class AsyncLocationManager {
         locationManager.desiredAccuracy = newAccuracy.convertingAccuracy
     }
 
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func updateAllowsBackgroundLocationUpdates(with newAllows: Bool) {
         locationManager.allowsBackgroundLocationUpdates = newAllows
     }
@@ -205,7 +209,9 @@ public final class AsyncLocationManager {
         try await locationPermissionTemporaryFullAccuracy(purposeKey: purposeKey)
     }
 
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func startUpdatingLocation() async -> LocationStream {
         let monitoringPerformer = MonitoringUpdateLocationPerformer()
         return LocationStream { streamContinuation in
@@ -237,7 +243,9 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func startMonitoring(for region: CLRegion) async -> RegionMonitoringStream {
         let performer = RegionMonitoringPerformer(region: region)
         return RegionMonitoringStream { streamContinuation in
@@ -251,7 +259,9 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func stopMonitoring(for region: CLRegion) {
         proxyDelegate.cancel(for: RegionMonitoringPerformer.self) { regionMonitoring in
             guard let regionPerformer = regionMonitoring as? RegionMonitoringPerformer else { return false }
@@ -261,7 +271,9 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func startMonitoringVisit() async -> VisitMonitoringStream {
         let performer = VisitMonitoringPerformer()
         return VisitMonitoringStream { stream in
@@ -275,14 +287,18 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func stopMonitoringVisit() {
         proxyDelegate.cancel(for: VisitMonitoringPerformer.self)
         locationManager.stopMonitoringVisits()
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func startMonitoringSignificantLocationChanges() async -> SignificantLocationChangeMonitoringStream {
         let monitoringPerformer = SignificantLocationChangeMonitoringPerformer()
         return SignificantLocationChangeMonitoringStream { streamContinuation in
@@ -296,7 +312,9 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func stopMonitoringSignificantLocationChanges() {
         locationManager.stopMonitoringSignificantLocationChanges()
         proxyDelegate.cancel(for: SignificantLocationChangeMonitoringPerformer.self)
@@ -323,7 +341,9 @@ public final class AsyncLocationManager {
 #endif
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func startRangingBeacons(satisfying: CLBeaconIdentityConstraint) async -> BeaconsRangingStream {
         let performer = BeaconsRangePerformer(satisfying: satisfying)
         return BeaconsRangingStream { stream in
@@ -337,7 +357,9 @@ public final class AsyncLocationManager {
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     public func stopRangingBeacons(satisfying: CLBeaconIdentityConstraint) {
         proxyDelegate.cancel(for: BeaconsRangePerformer.self) { beaconsMonitoring in
             guard let beaconsPerformer = beaconsMonitoring as? BeaconsRangePerformer else { return false }

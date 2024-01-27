@@ -25,6 +25,7 @@ import CoreLocation
 
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 public enum BeaconRangeEvent {
     case didRange(beacons: [CLBeacon], beaconConstraint: CLBeaconIdentityConstraint)
     case didFailRanginFor(beaconConstraint: CLBeaconIdentityConstraint, error: Error)
@@ -43,21 +44,29 @@ class BeaconsRangePerformer: AnyLocationPerformer {
     var eventssupported: [CoreLocationEventSupport] = [.didRangeBeacons, .didFailRanginForBeaconConstraint]
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     var satisfying: CLBeaconIdentityConstraint
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     var stream: BeaconsRangingStream.Continuation?
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     init(satisfying: CLBeaconIdentityConstraint) {
         self.satisfying = satisfying
     }
     
     @available(watchOS, unavailable)
-    @available(tvOS, unavailable)
+    @available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
     func linkContinuation(_ continuation: BeaconsRangingStream.Continuation) {
         self.stream = continuation
     }
