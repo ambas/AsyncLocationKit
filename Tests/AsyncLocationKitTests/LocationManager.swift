@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+@available(iOS 14.0, *)
 class MockLocationManager: CLLocationManager {
     private var mockAllowsBackgroundLocationUpdates: Bool = false
     private var _authStatus: CLAuthorizationStatus = .notDetermined

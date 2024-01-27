@@ -2,8 +2,9 @@ import XCTest
 import CoreLocation
 @testable import AsyncLocationKit
 
+@available(iOS 14.0, *)
 final class AsyncLocationKitTests: XCTestCase {
-    static let mockLocationManager = MockLocationManager()
+   static let mockLocationManager = MockLocationManager()
     
     func testDesiredAccuracy() {
         let firstAccuracy: LocationAccuracy = .nearestTenMetersAccuracy
