@@ -29,7 +29,7 @@ public enum LocationUpdateEvent {
     case didUpdateLocations(locations: [CLLocation])
     case didFailWith(error: Error)
 }
-
+@available(visionOS, unavailable)
 class MonitoringUpdateLocationPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

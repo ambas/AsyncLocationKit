@@ -22,6 +22,7 @@
 
 import Foundation
 
+@available(visionOS, unavailable)
 protocol AnyLocationPerformer: AnyObject {
     var typeIdentifier: ObjectIdentifier { get }
     var uniqueIdentifier: UUID { get }

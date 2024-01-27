@@ -32,6 +32,7 @@ public enum VisitMonitoringEvent {
     case didFailWithError(error: Error)
 }
 
+@available(visionOS, unavailable)
 class VisitMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

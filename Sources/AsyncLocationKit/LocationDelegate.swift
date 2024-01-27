@@ -23,6 +23,7 @@
 import CoreLocation
 import Foundation
 
+@available(visionOS, unavailable)
 internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
     weak var proxy: AsyncDelegateProxyInterface?
     
@@ -40,10 +41,12 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
         locationServicesEnabledDidChange()
     }
 
+  #if !os(visionOS)
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         proxy?.eventForMethodInvoked(.didChangeAuthorization(status: status))
         locationServicesEnabledDidChange()
     }
+  #endif
 
     private func locationServicesEnabledDidChange() {
         Task {
@@ -59,7 +62,7 @@ internal class LocationDelegate: NSObject, CLLocationManagerDelegate {
         proxy?.eventForMethodInvoked(.didUpdate(locations: locations))
     }
     
-    #if !os(tvOS)
+    #if !os(tvOS) && !os(visionOS)
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         proxy?.eventForMethodInvoked(.didUpdateHeading(heading: newHeading))
     }

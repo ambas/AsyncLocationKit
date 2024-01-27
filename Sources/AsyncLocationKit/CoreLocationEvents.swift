@@ -24,6 +24,7 @@ import Foundation
 import CoreLocation.CLLocationManagerDelegate
 import CoreLocation
 
+@available(visionOS, unavailable)
 enum CoreLocationDelegateEvent {
 //    MARK: - Authorization event
     case didChangeLocationEnabled(enabled: Bool)

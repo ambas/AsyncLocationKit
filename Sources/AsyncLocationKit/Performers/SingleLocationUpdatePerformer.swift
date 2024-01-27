@@ -23,6 +23,7 @@
 import Foundation
 import CoreLocation.CLLocation
 
+@available(visionOS, unavailable)
 class SingleLocationUpdatePerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

@@ -28,6 +28,7 @@ public typealias AccuracyAuthorizationContinuation = CheckedContinuation<CLAccur
 public typealias LocationOnceContinuation = CheckedContinuation<LocationUpdateEvent?, Error>
 public typealias LocationEnabledStream = AsyncStream<LocationEnabledEvent>
 public typealias LocationStream = AsyncStream<LocationUpdateEvent>
+@available(visionOS, unavailable)
 public typealias RegionMonitoringStream = AsyncStream<RegionMonitoringEvent>
 public typealias VisitMonitoringStream = AsyncStream<VisitMonitoringEvent>
 public typealias SignificantLocationChangeMonitoringStream = AsyncStream<SignificantLocationChangeEvent>
@@ -40,6 +41,7 @@ public typealias AccuracyAuthorizationStream = AsyncStream<AccuracyAuthorization
 @available(visionOS, unavailable)
 public typealias BeaconsRangingStream = AsyncStream<BeaconRangeEvent>
 
+@available(visionOS, unavailable)
 public final class AsyncLocationManager {
     private var locationManager: CLLocationManager
     private var proxyDelegate: AsyncDelegateProxyInterface
@@ -242,10 +244,10 @@ public final class AsyncLocationManager {
         })
     }
     
-    @available(watchOS, unavailable)
-    @available(watchOS, unavailable)
-@available(tvOS, unavailable)
-@available(visionOS, unavailable)
+    
+#if !os(visionOS)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
     public func startMonitoring(for region: CLRegion) async -> RegionMonitoringStream {
         let performer = RegionMonitoringPerformer(region: region)
         return RegionMonitoringStream { streamContinuation in
@@ -257,11 +259,10 @@ public final class AsyncLocationManager {
             }
         }
     }
+#endif
     
     @available(watchOS, unavailable)
-    @available(watchOS, unavailable)
-@available(tvOS, unavailable)
-@available(visionOS, unavailable)
+    @available(tvOS, unavailable)
     public func stopMonitoring(for region: CLRegion) {
         proxyDelegate.cancel(for: RegionMonitoringPerformer.self) { regionMonitoring in
             guard let regionPerformer = regionMonitoring as? RegionMonitoringPerformer else { return false }
@@ -369,6 +370,7 @@ public final class AsyncLocationManager {
     }
 }
 
+@available(visionOS, unavailable)
 extension AsyncLocationManager {
     private func locationPermissionWhenInUse() async -> CLAuthorizationStatus {
         let authorizationPerformer = RequestAuthorizationPerformer(currentStatus: getAuthorizationStatus())

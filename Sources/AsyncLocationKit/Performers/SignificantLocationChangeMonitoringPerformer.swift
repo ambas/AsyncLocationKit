@@ -30,6 +30,7 @@ public enum SignificantLocationChangeEvent {
     case didFailWith(error: Error)
 }
 
+@available(visionOS, unavailable)
 class SignificantLocationChangeMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

@@ -31,6 +31,7 @@ public enum HeadingMonitorEvent {
     case didFailWith(error: Error)
 }
 
+@available(visionOS, unavailable)
 class HeadingMonitorPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

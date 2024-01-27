@@ -27,6 +27,7 @@ public enum AuthorizationEvent {
     case didUpdate(authorization: CLAuthorizationStatus)
 }
 
+@available(visionOS, unavailable)
 class AuthorizationMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

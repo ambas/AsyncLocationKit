@@ -27,6 +27,7 @@ public enum LocationEnabledEvent {
     case didUpdate(enabled: Bool)
 }
 
+@available(visionOS, unavailable)
 class LocationEnabledMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

@@ -8,6 +8,7 @@
 import Foundation
 
 @MainActor
+@available(visionOS, unavailable)
 class ApplicationStateMonitor {
     private(set) var hasResignedActive = false
 
@@ -15,9 +16,11 @@ class ApplicationStateMonitor {
     private var hasBecomeActiveTask: Task<Void, Never>?
 
     func startMonitoringApplicationState() {
+#if !os(visionOS)
         guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return }
         startMonitoringHasResignedActive()
         startMonitoringHasBecomeActive()
+      #endif
     }
 
     func stopMonitoringApplicationState() {
@@ -26,6 +29,7 @@ class ApplicationStateMonitor {
         stopMonitoringHasBecomeActive()
     }
 
+#if !os(visionOS)
     func hasResignedActive() async -> Bool {
         guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return false }
         var iter = hasResignedActiveSequence.makeAsyncIterator()
@@ -62,6 +66,7 @@ class ApplicationStateMonitor {
             }
         }
     }
+  #endif
 
     private func stopMonitoringHasResignedActive() {
         hasResignedActiveTask?.cancel()
@@ -72,7 +77,7 @@ class ApplicationStateMonitor {
         hasBecomeActiveTask?.cancel()
         hasBecomeActiveTask = nil
     }
-
+#if !os(visionOS)
     @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
     private var hasResignedActiveSequence: AsyncMapSequence<NotificationCenter.Notifications, Bool> {
         _hasResignedActiveSequence as! AsyncMapSequence<NotificationCenter.Notifications, Bool>
@@ -85,8 +90,9 @@ class ApplicationStateMonitor {
 
     // We unfortunately need these backing variables since properties cannot be declared conditionally available
 
+  
     private var _hasResignedActiveSequence: Any? = {
-        guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return nil }
+        guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return ni }
         return NotificationCenter.default.notifications(named: NotificationNamesConstants.willResignActiveName).map { _ in true }
     }()
 
@@ -94,4 +100,5 @@ class ApplicationStateMonitor {
         guard #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) else { return nil }
         return NotificationCenter.default.notifications(named: NotificationNamesConstants.didBecomeActiveName).map { _ in true }
     }()
+  #endif
 }

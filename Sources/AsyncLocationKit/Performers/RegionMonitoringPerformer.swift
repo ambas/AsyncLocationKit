@@ -23,6 +23,7 @@
 import Foundation
 import CoreLocation.CLRegion
 
+@available(visionOS, unavailable)
 public enum RegionMonitoringEvent {
     case didEnterTo(region: CLRegion)
     case didExitTo(region: CLRegion)
@@ -30,6 +31,7 @@ public enum RegionMonitoringEvent {
     case monitoringDidFailFor(region: CLRegion?, error: Error)
 }
 
+@available(visionOS, unavailable)
 class RegionMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)
@@ -39,7 +41,9 @@ class RegionMonitoringPerformer: AnyLocationPerformer {
     
     var cancellable: Cancellable?
     var eventsSupport: [CoreLocationEventSupport] = [.didEnterRegion, .didExitRegion, .monitoringDidFailForRegion, .didStartMonitoringForRegion]
+
     var stream: RegionMonitoringStream.Continuation?
+
     var region: CLRegion
     
     init(region: CLRegion) {
@@ -49,11 +53,12 @@ class RegionMonitoringPerformer: AnyLocationPerformer {
     func linkContinuation(_ continuation: RegionMonitoringStream.Continuation) {
         stream = continuation
     }
+
     
     func eventSupported(_ event: CoreLocationDelegateEvent) -> Bool {
         return eventsSupport.contains(event.rawEvent())
     }
-    
+
     func invokedMethod(event: CoreLocationDelegateEvent) {
         switch event {
         case .didEnterRegion(let region):
@@ -68,6 +73,7 @@ class RegionMonitoringPerformer: AnyLocationPerformer {
             fatalError("Method can't be execute by this performer: \(String(describing: self)) for event: \(type(of: event))")
         }
     }
+
     
     func cancelation() { }
 }

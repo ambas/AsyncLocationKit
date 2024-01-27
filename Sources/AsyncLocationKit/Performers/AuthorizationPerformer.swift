@@ -23,6 +23,7 @@
 import Foundation
 import CoreLocation.CLLocation
 
+@available(visionOS, unavailable)
 class RequestAuthorizationPerformer: AnyLocationPerformer {
     private let currentStatus: CLAuthorizationStatus
     private var applicationStateMonitor: ApplicationStateMonitor!
@@ -77,6 +78,7 @@ class RequestAuthorizationPerformer: AnyLocationPerformer {
         case .didChangeAuthorization(let status):
             if status != .notDetermined {
                 Task {
+#if !os(visionOS)
                     if await applicationStateMonitor.hasResignedActive {
                         _ = await applicationStateMonitor.hasBecomeActive()
                     }
@@ -85,6 +87,7 @@ class RequestAuthorizationPerformer: AnyLocationPerformer {
                     continuation.resume(returning: status)
                     self.continuation = nil
                     cancellable?.cancel(for: self)
+                  #endif
                 }
             }
         default:

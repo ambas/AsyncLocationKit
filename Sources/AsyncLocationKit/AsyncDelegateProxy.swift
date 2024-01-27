@@ -21,9 +21,10 @@
 //  SOFTWARE.
 
 import Foundation
-
+@available(visionOS, unavailable)
 typealias CancelationCondition = ((AnyLocationPerformer) -> Bool)
 
+@available(visionOS, unavailable)
 protocol Cancellable: AnyObject {
     /// # Performer can use CheckecContinuation
     /// # who can return value only **once**, and next attempt will lead to **crash** application
@@ -49,6 +50,7 @@ protocol Cancellable: AnyObject {
     func cancel(for performer: AnyLocationPerformer)
 }
 
+@available(visionOS, unavailable)
 protocol AsyncDelegateProxyInterface: AnyObject {
     func eventForMethodInvoked(_ event: CoreLocationDelegateEvent)
     func addPerformer(_ performer: AnyLocationPerformer)
@@ -58,6 +60,7 @@ protocol AsyncDelegateProxyInterface: AnyObject {
     func cancel(for type: AnyLocationPerformer.Type, with condition: @escaping CancelationCondition)
 }
 
+@available(visionOS, unavailable)
 final class AsyncDelegateProxy: AsyncDelegateProxyInterface {
     /// Array of performers, who handle events from normal delegate
     var performers: [AnyLocationPerformer] = []
@@ -101,6 +104,7 @@ final class AsyncDelegateProxy: AsyncDelegateProxyInterface {
     }
 }
 
+@available(visionOS, unavailable)
 extension AsyncDelegateProxy: Cancellable {
     func cancel(for performer: AnyLocationPerformer) {
         performers.removeAll(where: { $0.uniqueIdentifier == performer.uniqueIdentifier })

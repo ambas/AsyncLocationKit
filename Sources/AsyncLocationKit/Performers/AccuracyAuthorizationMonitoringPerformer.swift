@@ -27,6 +27,7 @@ public enum AccuracyAuthorizationEvent {
     case didUpdate(accuracyAuthorization: CLAccuracyAuthorization)
 }
 
+@available(visionOS, unavailable)
 class AccuracyAuthorizationMonitoringPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)

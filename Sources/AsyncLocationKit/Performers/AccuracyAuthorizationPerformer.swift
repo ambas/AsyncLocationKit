@@ -23,6 +23,7 @@
 import Foundation
 import CoreLocation
 
+@available(visionOS, unavailable)
 class RequestAccuracyAuthorizationPerformer: AnyLocationPerformer {
     var typeIdentifier: ObjectIdentifier {
         return ObjectIdentifier(Self.self)
