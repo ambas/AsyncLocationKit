@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum LocationPermission {
+public enum LocationPermission: Sendable {
     case always
     case whenInUsage
 }
