@@ -193,6 +193,7 @@ public final class AsyncLocationManager {
 #endif
     
     @available(watchOS 7.0, *)
+    @MainActor
     public func requestPermission(with permissionType: LocationPermission) async -> CLAuthorizationStatus {
         switch permissionType {
         case .always:
